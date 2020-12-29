@@ -3,7 +3,7 @@
 <footer class="bg-light text-center text-lg-start">
     <!-- Grid container -->
     <div class="container p-4">
-    <!--Grid row-->
+    <!--Grid row--> 
     <div class="row">
         <!--Grid column-->
         <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
@@ -50,7 +50,7 @@
 
         function drawGraph(event) {
             drawLocalGraph(event);
-            drawVMGraph(event);
+            //drawVMGraph(event);
         }
 
         function get_local_Val() {
@@ -89,6 +89,7 @@
             event.preventDefault();
             let graph_type = get_graph_type();
             let localTime = get_local_Val();
+            let vmTime = get_vm_Val();
             let lables = get_lable(localTime);
             let emailHelp = document.getElementById('emailHelp');
             let statusDisplay = document.getElementById('alertStatus');
@@ -101,7 +102,7 @@
                 }, 2500);
             } else {
                 emailHelp.innerHTML = `Please Enter ${localTime} coma seperated values`;
-                var ctx = document.getElementById('localChart').getContext('2d');
+                var ctx = document.getElementById('compareChart').getContext('2d');
                 var myChart = new Chart(ctx, {
                     type: graph_type,
                     data: {
@@ -109,6 +110,27 @@
                         datasets: [{
                             label: 'Local Machine',
                             data: localTime,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }, 
+                        {
+                            label: 'Virtual Machine',
+                            data: vmTime,
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
                                 'rgba(54, 162, 235, 0.2)',
@@ -172,7 +194,7 @@
             
         }
 
-        function drawVMGraph(event) {
+    /*  function drawVMGraph(event) {
             event.preventDefault();
             let graph_type = get_graph_type();
             let vmTime = get_vm_Val();
@@ -268,7 +290,7 @@
                 });
             }
             
-        }
+        } */
 
         function get_graph_type() {
             let bar = document.getElementById('r1');
